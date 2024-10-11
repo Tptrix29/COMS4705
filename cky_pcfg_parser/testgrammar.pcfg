@@ -1,0 +1,18 @@
+# Startsymbols
+S ; 1.0
+
+# Phrasal rules
+S -> NP VP; 1.0 
+VP -> V NP; 0.6
+VP -> VP PP; 0.4
+PP -> P NP; 1.0
+NP -> D N; 0.7
+NP -> NP PP; 0.2
+
+NP -> she; 0.05
+NP -> glasses; 0.05
+D -> the; 1.0
+N -> cat; 0.3
+N -> glasses; 0.7
+V -> saw; 1.0
+P -> with; 1.0
