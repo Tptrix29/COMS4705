@@ -118,11 +118,28 @@ class FeatureExtractor(object):
         # TODO: Write this method for Part 2
         # TODO: words, pos
         # account for the special symbols (<CD>,<NNP>,<UNK>,<ROOT>,<NULL>)
-        stack_embed = state.stack[-3:] if len(state.stack) >= 3 else [4] * (3 - len(state.stack)) + state.stack
-        buffer_embed = state.buffer[-3:] if len(state.buffer) >= 3 else [4] * (3 - len(state.buffer)) + state.buffer
+        stack_idx = state.stack[-3:] if len(state.stack) >= 3 else [None] * (3 - len(state.stack)) + state.stack
+        buffer_idx = state.buffer[-3:] if len(state.buffer) >= 3 else [None] * (3 - len(state.buffer)) + state.buffer
+        stack_embed, buffer_embed = [], []
+        def parse(idx):
+            if idx is None:
+                return self.word_vocab["<NULL>"]
+            elif pos[idx] == "NNP":
+                return self.word_vocab["<NNP>"]
+            elif pos[idx] == "CD":
+                return self.word_vocab["<CD>"]
+            elif idx == 0:
+                return self.word_vocab["<ROOT>"]
+            else:
+                return self.word_vocab.get(words[idx], self.word_vocab["<UNK>"])
+        for i in range(3):
+            # stack
+            stack_embed.append(parse(stack_idx[i]))
+            # buffer
+            buffer_embed.append(parse(buffer_idx[i]))
         return np.concatenate([np.array(stack_embed[::-1]), np.array(buffer_embed[::-1])])
 
-    def get_output_representation(self, output_pair):  
+    def get_output_representation(self, output_pair):
         # TODO: Write this method for Part 2
         if output_pair[1] is None:
             idx = self.output_labels[(output_pair[0], None)]

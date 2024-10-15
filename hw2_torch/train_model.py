@@ -33,9 +33,9 @@ class DependencyModel(Module):
   def forward(self, inputs):
     # TODO: complete for part 3
     embeds = self.embed(inputs)
-    print(f"Embeds shape (init): {embeds.shape}")
+    # print(f"Embeds shape (init): {embeds.shape}")
     embeds = embeds.view(-1, 768)
-    print(f"Embeds shape (reshape): {embeds.shape}")
+    # print(f"Embeds shape (reshape): {embeds.shape}")
     logits = self.fc2(relu(self.fc1(embeds)))
     return logits  # replace this line
 
@@ -65,7 +65,7 @@ def train(model, loader):
     loss = loss_function(predictions, targets)
     tr_loss += loss.item()
 
-    print("Batch loss: ", loss.item()) # Helpful for debugging, maybe
+    # print("Batch loss: ", loss.item()) # Helpful for debugging, maybe
 
     tr_steps += 1
     
