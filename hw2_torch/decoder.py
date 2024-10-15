@@ -15,7 +15,9 @@ class Parser(object):
 
         # Create a new model and load the parameters
         self.model = DependencyModel(len(extractor.word_vocab), len(extractor.output_labels))
-        self.model.load_state_dict(torch.load(modelfile))
+        self.model.load_state_dict(torch.load(modelfile,
+                                              weights_only=True,
+                                              map_location=torch.device("cuda" if torch.cuda.is_available() else "cpu")))
         sys.stderr.write("Done loading model")
 
         # The following dictionary from indices to output actions will be useful

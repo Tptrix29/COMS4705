@@ -1,6 +1,13 @@
 # COMS4705
 Homework for Natural Language Processing course in Columbia University.
 
+## Setup
+```shell
+conda create -n nlp python=3.12
+conda activate nlp
+pip install -r requirements.txt
+```
+
 ## Contents
 - Homework 1: N-gram model
     - sentence generation
