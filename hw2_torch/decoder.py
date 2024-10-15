@@ -22,7 +22,7 @@ class Parser(object):
         self.output_labels = dict([(index, action) for (action, index) in extractor.output_labels.items()])
 
     def parse_sentence(self, words, pos):
-
+        # print(f"words: {words}")
         state = State(range(1,len(words)))
         state.stack.append(0)
 
@@ -33,12 +33,14 @@ class Parser(object):
             predictions = self.model(inputs)
             predictions = predictions.detach().numpy().flatten()
             sorted_indices = np.argsort(predictions)[::-1]
+            # print(f"stack: {state.stack}, buffer: {state.buffer}")
 
             for index in sorted_indices:
                 transition, label = self.output_labels[index]
+                # print(f"transition: {transition}, label: {label}")
                 if transition == "shift":
-                    # If the buffer is empty, we can't shift
-                    if state.buffer:
+                    # shift if the buffer has more than one word, when the buffer has only one word, we can shift only if the stack is empty
+                    if (len(state.buffer) == 1 and len(state.stack) == 0) or len(state.buffer) > 1:
                         state.shift()
                         break
                 elif transition == "left_arc":
@@ -55,7 +57,6 @@ class Parser(object):
         result = DependencyStructure()
         for p,c,r in state.deps:
             result.add_deprel(DependencyEdge(c,words[c],pos[c],p, r))
-
         return result
 
 

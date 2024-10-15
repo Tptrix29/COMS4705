@@ -32,10 +32,9 @@ python get_vocab.py data/train.conll data/words.vocab data/pos.vocab
 python extract_training_data.py data/train.conll data/input_train.npy data/target_train.npy
 # train model
 python train_model.py data/input_train.npy data/target_train.npy data/model.pt
+python train_model_gpu.py data/input_train.npy data/target_train.npy data/model.pt
 # decode
 python decoder.py data/model.pt data/dev.conll
 # evaluate
 python evaluate.py data/model.pt data/dev.conll
 ```
-
-
