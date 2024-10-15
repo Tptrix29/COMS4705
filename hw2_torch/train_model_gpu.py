@@ -114,7 +114,8 @@ if __name__ == "__main__":
     print("Done loading data")
 
     # Now train the model
-    for i in range(5): 
+    epochs = 8
+    for i in range(epochs):
       train(model, loader, device)
 
 

@@ -44,4 +44,6 @@ python train_model_gpu.py data/input_train.npy data/target_train.npy data/model.
 python decoder.py data/model.pt data/dev.conll
 # evaluate
 python evaluate.py data/model.pt data/dev.conll
+python evaluate.py data/model-macos.pt data/dev.conll
+
 ```
