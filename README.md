@@ -11,9 +11,9 @@ pip install -r requirements.txt
 ## Contents
 - Homework 1: N-gram model
     - sentence generation
-    - perplexity calculation: pp = 2^{-l}, l = \frac{1}{M} \sum_{i=1}^{N} s_i,  s_i = \frac{1}{n_i} \sum_{j=1}^{n_i} -\log_2 p(w_{i,j} | w_{i,j-1}, w_{i,j-2})
+    - perplexity calculation: $pp = 2^{-l}, l = \frac{1}{M} \sum_{i=1}^{N} s_i,  s_i = \frac{1}{n_i} \sum_{j=1}^{n_i} -\log_2 p(w_{i,j} | w_{i,j-1}, w_{i,j-2})$
     - smoothing method: Laplace, Interpolation
-- Homework 2: 
+- Homework 2: Dependency Parsing with Neural Networks
     
     **Metadata: **
     - conll_reader.py: data structures to represent a dependency tree, as well as functionality to read and write trees in the CoNLL-X format (explained below). 
@@ -22,7 +22,8 @@ pip install -r requirements.txt
     - train_model.py: specify and train the neural network model. This script writes a file containing the model architecture and trained weights. 
     - decoder.py: uses the trained model file to parse some input. For simplicity, the input is a CoNLL-X formatted file, but the dependency structure in the file is ignored. Prints the parser output for each sentence in CoNLL-X format. 
     - evaluate.py: this works like decoder.py, but instead of ignoring the input dependencies it uses them to compare the parser output. Prints evaluation results. 
-
+- Homework 3: Image Captioning with LSTM
+- Homework 4: Fine-tuning BERT for Semantic Role Labeling
 
 ## Usage
 - Homework 1: 
@@ -45,5 +46,6 @@ python decoder.py data/model.pt data/dev.conll
 # evaluate
 python evaluate.py data/model.pt data/dev.conll
 python evaluate.py data/model-macos.pt data/dev.conll
-
 ```
+- Homework 3: Run on Google Colab
+- Homework 4: Run on Google Colab
